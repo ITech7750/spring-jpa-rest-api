@@ -9,5 +9,7 @@ data class UserDto(
     @NotNull
     val id : Int,
     @Schema(description = "Имя пользователя")
-    val title: String,
+    val name: String,
+    val wish: String,
+    var dependId: Int,
 )
