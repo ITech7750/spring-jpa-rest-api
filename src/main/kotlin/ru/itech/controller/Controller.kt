@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import ru.itech.dto.CommunityDto
 import ru.itech.dto.TempDto
+import ru.itech.dto.UserDto
 import ru.itech.service.CommunityService
 
 /*
@@ -34,12 +35,12 @@ class Controller (
     fun getAll(@RequestParam("page") pageIndex: Int) : List<CommunityDto> =
         communityService.getAll(pageIndex)
 
-    @Operation(method = "Получение всех групп без участников")
+    @Operation(method = "Получение всех групп без данных об участниках")
     @GetMapping("/groups")
     fun getAllWithOutParticipants() : List<TempDto> =
         communityService.getAllWithOutParticipants()
 
-    @Operation(method = "Получение по id")
+    @Operation(method = "Получение информации о группе по id")
     @GetMapping("/groups/{id}")
     @Parameter(description = "id - уникальный идентификатор пользователя или компании")
     fun getById(@PathVariable("id") id: Int): CommunityDto =
@@ -51,10 +52,16 @@ class Controller (
     fun seach(@RequestParam("prefix") prefix: String): List<CommunityDto> =
         communityService.search(prefix)
 
-    @Operation(method = "Вывести список завсимых объектов")
-    @GetMapping("/titles")
+    @Operation(method = "Вывести список участников сообщества")
+    @GetMapping("/groups/title")
     fun getCommunityTitle():List<String> =
         communityService.getCommunityTitle()
+
+    @Operation(method = "Вывести информацию об участнике сообщества")
+    @GetMapping("/grous/title/{id}")
+    fun getInfAbout(@PathVariable("id") id: Int):List<String> =
+        communityService.getCommunityTitle()
+
 
     @Operation(method = "Создать новую группу с пользователями")
     @PostMapping("/create")
@@ -68,14 +75,22 @@ class Controller (
         return communityService.groupcreate(dto)
     }
 
-    @Operation(method = "Обновить учетную запись")
+    /*
+    @Operation(method = "Добавление участника в группу по идентификатору группы")
+    @PostMapping("/group/{id}")
+    fun groupCreateUser(@PathVariable id: Int, @RequestBody dto: UserDto): Int {
+        return communityService.groupCreateUser(id,dto)
+    }
+    */
+
+    @Operation(method = "Обновить учетную запись по id")
     @PutMapping("/group/{id}")
     @Parameter(description = "id - уникальный идентификатор пользователя или компании")
     fun update(@PathVariable id: Int, @RequestBody dto: TempDto) {
         return communityService.update(id,dto)
     }
 
-    @Operation(method = "Удалить учетную запись")
+    @Operation(method = "Удалить учетную запись по id")
     @DeleteMapping("/{id}")
     @Parameter(description = "id - уникальный идентификатор пользователя или компании")
     fun delete(@PathVariable id: Int){

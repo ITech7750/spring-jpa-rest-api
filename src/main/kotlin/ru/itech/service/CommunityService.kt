@@ -1,8 +1,11 @@
 package ru.itech.service
 
 
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import ru.itech.dto.CommunityDto
 import ru.itech.dto.TempDto
+import ru.itech.dto.UserDto
 
 
 interface CommunityService {
@@ -21,6 +24,9 @@ interface CommunityService {
     fun create(dto: CommunityDto): Int
 
     fun groupcreate(dto: TempDto): Int
+
+    //fun groupCreateUser(id: Int, dto: UserDto): Int
+
     fun update(id: Int,dto: TempDto)
 
     fun delete(id: Int)

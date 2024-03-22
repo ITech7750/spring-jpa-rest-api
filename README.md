@@ -13,7 +13,7 @@ use app_db;
 ```mysql
 create table community_table (
                                  id int(11) primary key auto_increment,
-                                 title varchar(100) not null,
+                                 name varchar(100) not null,
                                  description varchar(100) not null
 );
 ```
@@ -24,11 +24,12 @@ INSERT INTO app_db.community_table (id, title, description) VALUES (1, 'test', '
 Cоздаем таблицу пользователей
 ```mysql
 create table user_table (
-                                 id int(11) primary key auto_increment,
-                                 title varchar(100) not null,
-                                 information varchar(100) not null,
-                                 community_id int(11),
-                                 foreign key (community_id)  references community_table (Id)
+                            id int(11) primary key auto_increment,
+                            name varchar(100) not null,
+                            wish varchar(100) not null,
+                            community_id int(11),
+                            depend_id int(11),
+                            foreign key (community_id)  references community_table (Id)
 );
 ```
 Добавим тестовое поле для пользователя

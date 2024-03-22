@@ -60,6 +60,24 @@ class CommunityServiceImplementation (
         val communityEntity = communityRepository.save(dto.toEntity())
         return communityEntity.id
     }
+    /*
+    override fun groupCreateUser(id: Int, dto: UserDto): Int {
+        val communityDto = getById(id)
+        val communityEntity = communityRepository.save(communityDto.toEntity())
+        val UserEntity =
+            UserEntity(
+                id = dto.id,
+                name = dto.name,
+                //communityId =  dto.community,
+                dependId = dto.dependId,
+                wish = dto.wish
+            )
+        val members = communityDto.participants.map{it.toEntity(communityEntity)}
+        userRepository.saveAll(members)
+        return UserEntity.id
+    }
+
+     */
 
     /*
     override fun update(id: Int, dto: CommunityDto): CommunityDto {
