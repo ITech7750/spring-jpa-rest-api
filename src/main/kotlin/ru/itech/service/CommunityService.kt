@@ -25,7 +25,7 @@ interface CommunityService {
 
     fun groupcreate(dto: TempDto): Int
 
-    //fun groupCreateUser(id: Int, dto: UserDto): Int
+    fun groupCreateUser(id: Int, dto: UserDto?): Int?
 
     fun update(id: Int,dto: TempDto)
 

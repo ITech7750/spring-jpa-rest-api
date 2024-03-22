@@ -16,7 +16,7 @@ class UserEntity (
 
     @ManyToOne
     @JoinColumn(name = "community_id")
-    var communityId: CommunityEntity,
+    var communityId: CommunityEntity?,
 
-    var dependId: Int,
+    var dependId: Int?,
     )

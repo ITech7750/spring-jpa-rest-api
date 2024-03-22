@@ -6,4 +6,6 @@ import ru.itech.entity.UserEntity
 
 interface UserRepository: CrudRepository<UserEntity,Int> {
     fun deleteAllByCommunityId(communityId: CommunityEntity)
+
+    fun getByName(name:String)
 }

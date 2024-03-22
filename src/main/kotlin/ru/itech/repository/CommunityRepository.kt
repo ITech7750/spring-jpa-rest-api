@@ -11,4 +11,6 @@ interface CommunityRepository: CrudRepository<CommunityEntity,Int>{
     fun findByNameStartsWithOrderByName(prefix: String): List<CommunityEntity>
 
     fun findAllByOrderByName(): List<NameOnly>
+
+    fun findByName(name: String):String
 }

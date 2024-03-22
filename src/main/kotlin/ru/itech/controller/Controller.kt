@@ -75,13 +75,13 @@ class Controller (
         return communityService.groupcreate(dto)
     }
 
-    /*
+
     @Operation(method = "Добавление участника в группу по идентификатору группы")
     @PostMapping("/group/{id}")
-    fun groupCreateUser(@PathVariable id: Int, @RequestBody dto: UserDto): Int {
+    fun groupCreateUser(@PathVariable id: Int, @RequestBody dto: UserDto): Int? {
         return communityService.groupCreateUser(id,dto)
     }
-    */
+
 
     @Operation(method = "Обновить учетную запись по id")
     @PutMapping("/group/{id}")
