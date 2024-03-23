@@ -63,6 +63,13 @@ class Controller (
         communityService.getCommunityTitle()
 
 
+    @Operation(method = "Получение информации для конкретного участника группы, кому он дарит подарок")
+    @GetMapping("/group/{companyId}/participant/{userId}/recipient")
+    fun getInfAboutUser(@PathVariable userId: Int, @PathVariable companyId: Int):UserDto =
+        communityService.getInfAboutUser(userId,companyId)
+
+
+
     @Operation(method = "Создать новую группу с пользователями")
     @PostMapping("/create")
     fun create(@RequestBody dto: CommunityDto): Int {
@@ -80,6 +87,13 @@ class Controller (
     @PostMapping("/group/{id}")
     fun groupCreateUser(@PathVariable id: Int, @RequestBody dto: UserDto): Int? {
         return communityService.groupCreateUser(id,dto)
+    }
+
+
+    @Operation(method = "Проведение жеребьевки в группепо идентификатору группы")
+    @PostMapping("/group/{companyId}/toss")
+    fun groupCreateUser(@PathVariable companyId: Int) :MutableList<UserDto>{
+        return communityService.sortUsers(companyId)
     }
 
 

@@ -122,6 +122,28 @@ class CommunityServiceImplementation (
 
     }
 
+    @Transactional
+    override fun sortUsers(companyId: Int): MutableList<UserDto> {
+        val community = communityRepository.findByIdOrNull(companyId)?: throw CommunityNotFoundException(companyId)
+        val users = userRepository.findAllByCommunityId(community).toMutableList()
+        var id = users.last().id
+        users.forEachIndexed { index, user ->
+            users[index] = user.copy(dependId = id)
+            id = user.id
+        }
+        userRepository.saveAll(users.map {it.toEntity(community)})
+        return users
+
+    }
+
+    override fun getInfAboutUser(userId: Int, companyId: Int): UserDto {
+        val community = communityRepository.findByIdOrNull(companyId)?: throw CommunityNotFoundException(companyId)
+        val user = userRepository.findByIdOrNull(userId)
+        val users = userRepository.findAllByCommunityId(community).toMutableList()
+        return users[user?.dependId!!]
+    }
+
+
     // метод расширения toDto чтобы "мапить" сущность с БД в dto
     private fun CommunityEntity.toDto(): CommunityDto = CommunityDto(
             id = this.id,
@@ -152,6 +174,7 @@ class CommunityServiceImplementation (
             name = this.name,
             id = this.id,
             wish = this.wish,
+            //communityId = this.id,
             dependId = this.dependId
         )
     private fun UserDto.toEntity(community: CommunityEntity): UserEntity =

@@ -32,6 +32,11 @@ interface CommunityService {
     fun delete(id: Int)
 
     fun deleteById(userId: Int,companyId: Int)
+
+    fun sortUsers(companyId: Int):MutableList<UserDto>
+
+    fun getInfAboutUser(userId:Int ,companyId:Int):UserDto
+
 }
 
 

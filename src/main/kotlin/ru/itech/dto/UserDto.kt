@@ -7,9 +7,10 @@ import org.jetbrains.annotations.NotNull
 data class UserDto(
     @Schema(description = "Идентификатор пользователя")
     @NotNull
-    val id : Int?,
+    val id: Int?,
     @Schema(description = "Имя пользователя")
     val name: String,
     val wish: String,
+    //var communityId: Int = 0,
     var dependId: Int?,
 )

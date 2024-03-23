@@ -20,8 +20,9 @@ repositories {
 }
 
 dependencies {
-	// Для работы с JPA
+	// Для работы с JPA и JDBC
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	// Для web приложения (Tomcat, Jackson) и для обработки JSON
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	//  Базовые пакеты
