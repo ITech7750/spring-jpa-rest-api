@@ -68,8 +68,9 @@ class CommunityServiceImplementation (
         if (dto != null) {
             community?.let { dto.toEntity(it) }?.let {userRepository.save(it) }
         }
-        val tmp = dto?.id
-        return tmp
+        val name = dto?.name
+        val userId = name?.let { userRepository.findByName(it).id }
+        return userId
     }
 
 
@@ -109,6 +110,16 @@ class CommunityServiceImplementation (
             ?: throw CommunityNotFoundException(id)
         userRepository.deleteAllByCommunityId(upd)
         communityRepository.delete(upd)
+    }
+
+    @Transactional
+    override fun deleteById(userId: Int,companyId: Int) {
+        val community = communityRepository.findByIdOrNull(companyId)
+        val user = userRepository.findByIdOrNull(userId)
+        if (user != null) {
+            user.communityId = null
+        }
+
     }
 
     // метод расширения toDto чтобы "мапить" сущность с БД в dto

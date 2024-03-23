@@ -30,6 +30,8 @@ interface CommunityService {
     fun update(id: Int,dto: TempDto)
 
     fun delete(id: Int)
+
+    fun deleteById(userId: Int,companyId: Int)
 }
 
 

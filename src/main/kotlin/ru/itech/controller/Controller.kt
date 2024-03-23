@@ -98,6 +98,14 @@ class Controller (
 
     }
 
+    @Operation(method = "Удаление участника из группы по идентификаторам группы участника")
+    @DeleteMapping("group/{companyId}/participant/{userId}")
+    @Parameter(description = "id - уникальный идентификатор пользователя или компании")
+    fun deleteById(@PathVariable userId: Int, @PathVariable companyId: Int){
+        return communityService.deleteById(userId, companyId)
+
+    }
+
     /*
     Скрыть аннотацию к методу можно при помощи
     @Parameter(hidden = true)
